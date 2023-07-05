@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="date=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta name="color-scheme" content="light dark only">
+    <meta name="supported-color-schemes" content="light dark only">
+    <title>DDB</title>
+
+    <!--[if (gte mso 9)|(IE)]>
+                        <style>
+body,table,tr,table,a,p,ul,li,h1,h2,h3,h4,td,th,span,table.MsoNormalTable{
+font-family:Arial, Helvetica, sans-serif !important;
+mso-line-height:exactly !important;
+line-height:110% !important;
+}
+table{
+border-collapse:collapse !important;
+mso-table-lspace:0pt !important;
+mso-table-rspace:0pt !important;
+}
+table td{
+border-collapse:collapse !important;
+}
+ul {
+margin:0 !important;
+}
+li {
+margin-left:40px !important;
+}
+li.firstListItem {
+margin-top:20px !important;
+}
+li.lastListItem {
+margin-bottom:20px !important;
+}
+.mso-padding-right{
+padding-right:20px !important;
+}
+</style>
+<xml>
+<o:OfficeDocumentSettings>
+<o:AllowPNG/>
+<o:PixelsPerInch>96</o:PixelsPerInch>
+</o:OfficeDocumentSettings>
+</xml>
+<![endif]-->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2) format('woff2');
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 400;
+            src: local('Roboto-Italic'), url(https://fonts.gstatic.com/s/roboto/v27/KFOkCnqEu92Fr1Mu51xIIzIXKMny.woff2) format('woff2');
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v27/KFOlCnqEu92Fr1MmWUlfBBc4AMP6lQ.woff2) format('woff2');
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 700;
+            src: local('Roboto-BoldItalic'), url(https://fonts.gstatic.com/s/roboto/v27/KFOjCnqEu92Fr1Mu51TzBic6CsTYl4BO.woff2) format('woff2');
+        }
+
+
+        :root {
+            color-scheme: light dark;
+            supported-color-schemes: light dark;
+        }
+
+        tr,
+        td,
+        th,
+        ol {
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+
+        /**
+        * @tab Body
+        * @section Link
+        * @style text-link
+        */
+        a {
+            /*@editable*/
+            text-decoration: none;
+            /*@editable*/
+            color: inherit;
+            /*@editable*/
+            font-weight: inherit;
+        }
+
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            /* letter-spacing: .2px; */
+        }
+
+        /**
+        * @tab Headers
+        * @section H2
+        * @style H2
+        */
+        h2 {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 28px;
+            font-weight: bold;
+            /* letter-spacing: .2px; */
+            /*@editable*/
+            color: #5a5a5a;
+        }
+
+        /**
+* @tab Headers
+* @section H3
+* @style H3
+*/
+        h3 {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 25px;
+            font-weight: bold;
+            /* letter-spacing: .2px; */
+            /*@editable*/
+            color: #5a5a5a;
+        }
+
+        /**
+* @tab Headers
+* @section H4
+* @style H4
+*/
+        h4 {
+            font-family: Arial, sans-serif;
+            font-size: 21px;
+            margin: 0;
+            /*@editable*/
+            color: #5a5a5a;
+        }
+
+        p+h1,
+        p+h2,
+        p+h3,
+        p+h4 {
+            margin: 0px 0 10px 0;
+        }
+
+        h1 a,
+        h2 a,
+        h3 a,
+        h4 a {
+            text-decoration: none;
+        }
+
+        /**
+* @tab Body
+* @section paragraph
+* @style p
+*/
+
+        p:first-child {
+            margin-top: 0 !important;
+        }
+
+        p:last-child {
+            margin-bottom: 0 !important;
+        }
+
+        ul,
+        li {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            line-height: 1.3;
+            mso-line-height: exactly;
+            letter-spacing: .2px;
+            -webkit-font-smoothing: antialiased;
+            margin: 10px 0;
+        }
+
+        u+.gmail-body .gmail-wrap a {
+            text-decoration: inherit !important;
+            color: inherit !important;
+        }
+
+        .gmail-fix {
+            display: none !important;
+        }
+
+        /* MOVES THE HIDEABLE SECTION ICON TO THE LEFT OF THE DOCUMENT */
+        .tpl-hidewrap {
+            left: 0 !important;
+            margin-top: 20px !important;
+            display: block !important;
+            height: 100px !important;
+            width: 100px !important;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 480px) {
+            u+.gmail-body .gmail-wrap {
+                width: 100% !important;
+                width: 100vw !important;
+            }
+        }
+
+        @media screen and (max-width: 599px) {
+            .full-width {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+
+        @media screen and (max-width: 599px) {
+            .mobile-full-width {
+                width: 100% !important;
+                height: auto !important;
+                max-width: 100% !important;
+                display: block !important;
+                padding-top: 10px !important;
+            }
+
+            .image-responsive {
+                width: 100%;
+                height: auto;
+                max-width: 100%;
+            }
+
+
+        }
+
+        @media screen and (max-width: 599px) {
+            .mobile-padding-bottom {
+                padding-bottom: 20px !important;
+            }
+        }
+
+        @media screen and (max-width: 599px) {
+            .mobile-padding-left {
+                padding-left: 20px !important;
+            }
+        }
+
+        @media screen and (max-width: 599px) {
+            .mobile-padding-zero {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+        }
+
+        @media screen and (max-width: 599px) {
+            .mobile-padding-top-zero {
+                padding-top: 0 !important;
+            }
+        }
+
+        @media screen and (max-width: 599px) {
+            .mobile-padding-right {
+                padding-right: 20px !important;
+            }
+        }
+
+        @media only screen and (max-width: 599px) {
+            .mobile-stack {
+                display: block !important;
+            }
+        }
+
+        @media only screen and (max-width: 599px) {
+            .mobile-max-width {
+                max-width: 300px !important;
+            }
+        }
+
+        @media only screen and (max-width: 599px) {
+            .mobile-center {
+                margin: 0 auto !important;
+            }
+        }
+
+        @media only screen and (max-width: 599px) {
+            .mobile-text-center {
+                text-align: center !important;
+            }
+        }
+
+        @media only screen and (max-width: 599px) {
+            .mobile-none {
+                display: none !important;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+
+            body,
+            th,
+            td,
+            h1,
+            h2,
+            h3,
+            h4,
+            p {
+                color: #ffffff !important;
+            }
+
+            body,
+            th,
+            td {
+                background-color: #000000 !important;
+            }
+
+
+            .footer a {
+                color: #ffffff !important;
+            }
+
+            .dark-mode-green,
+            .dark-mode-green span,
+            .dark-mode-green p {
+                background-color: #00788c !important;
+            }
+
+            .dark-mode-orange,
+            .dark-mode-orange span,
+            .dark-mode-orange p {
+                background-color: #f69a0f !important;
+            }
+
+            .dark-mode-grey,
+            .dark-mode-grey span,
+            .dark-mode-grey p {
+                background-color: #f2f2f2 !important;
+            }
+
+            .dark-orange {
+                color: #ff8201 !important;
+
+            }
+
+            .dark-green {
+                color: #00809a !important;
+
+            }
+
+            .dark-orange-1 {
+                color: #EB5D0B !important;
+
+            }
+
+            .footer a {
+                color: #ffffff !important;
+            }
+
+            .dark-bg-blue {
+                background-color: #041E42 !important;
+            }
+
+            .dark-bg-orange {
+                background-color: #ff8201 !important;
+
+            }
+
+            .dark-bg-footer {
+                background-color: #202020 !important;
+
+            }
+
+        }
+
+        /*end dark mode*/
+    </style>
+</head>
+
+
+<body style="margin:0; padding:0; margin:0 auto;background-color:#ffffff;" class="gmail-body" bgcolor="#ffffff">
+    <center>
+        <span align='center'  
+            style="font-size:1px; line-height:1px; max-height:0px; max-width:0px; background-color:#ffffff; color: #ffffff;">
+        </span>
+        <div role="article" aria-roledescription="email" aria-label="email name" lang="es" style="font-size:1rem">
+            <!-- BEGIN : OUTER CONTAINER -->
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;"
+                align="center" class="gmail-wrap">
+                <tr>
+                    <td>
+                        <!--[if (gte mso 9)|(IE)]>
+                                    <table role="presentation" width="600" align="center">
+                                    <tr>
+                                        <td align="center">
+                                        <![endif]-->
+                        <!-- BEGIN : INNER TABLE -->
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center"
+                            style="border-collapse: collapse;max-width:600px;width:100%">
+
+                            <!-- BEGIN : dynamic content -->
+                                                    
+    <!-- BEGIN : IMAGE -->
+    <tr>
+        <td align="center" style="padding:0;margin:0;display:block;height:auto;"> <img
+                src="./img/image_1.jpg" width="600" alt="image_1"
+                style="max-width:600px; display:block;height:auto; font-size: 26px; font-weight: bold; color:#ffffff;"
+                class="full-width" /> </td>
+    </tr>
+    <!-- END : IMAGE -->
+                        
+    <!-- BEGIN : IMAGE -->
+    <tr>
+        <td align="center" style="padding:0;margin:0;display:block;height:auto;"> <img
+                src="./img/image_2.png" width="600" alt="image_2"
+                style="max-width:600px; display:block;height:auto; font-size: 26px; font-weight: bold; color:#ffffff;"
+                class="full-width" /> </td>
+    </tr>
+    <!-- END : IMAGE -->
+                        
+    <!-- BEGIN : IMAGE -->
+    <tr>
+        <td align="center" style="padding:0;margin:0;display:block;height:auto;"> <img
+                src="./img/image_3.png" width="600" alt="image_3"
+                style="max-width:600px; display:block;height:auto; font-size: 26px; font-weight: bold; color:#ffffff;"
+                class="full-width" /> </td>
+    </tr>
+    <!-- END : IMAGE -->
+                        
+    <!-- BEGIN : IMAGE -->
+    <tr>
+        <td align="center" style="padding:0;margin:0;display:block;height:auto;"> <img
+                src="./img/image_4.png" width="600" alt="image_4"
+                style="max-width:600px; display:block;height:auto; font-size: 26px; font-weight: bold; color:#ffffff;"
+                class="full-width" /> </td>
+    </tr>
+    <!-- END : IMAGE -->
+                        
+    <!-- BEGIN : IMAGE -->
+    <tr>
+        <td align="center" style="padding:0;margin:0;display:block;height:auto;"> <img
+                src="./img/image_5.png" width="600" alt="image_5"
+                style="max-width:600px; display:block;height:auto; font-size: 26px; font-weight: bold; color:#ffffff;"
+                class="full-width" /> </td>
+    </tr>
+    <!-- END : IMAGE -->
+                        
+    <!-- BEGIN : IMAGE -->
+    <tr>
+        <td align="center" style="padding:0;margin:0;display:block;height:auto;"> <img
+                src="./img/image_6.png" width="600" alt="image_6"
+                style="max-width:600px; display:block;height:auto; font-size: 26px; font-weight: bold; color:#ffffff;"
+                class="full-width" /> </td>
+    </tr>
+    <!-- END : IMAGE -->
+                        
+    <!-- BEGIN : IMAGE -->
+    <tr>
+        <td align="center" style="padding:0;margin:0;display:block;height:auto;"> <img
+                src="./img/image_7.png" width="600" alt="image_7"
+                style="max-width:600px; display:block;height:auto; font-size: 26px; font-weight: bold; color:#ffffff;"
+                class="full-width" /> </td>
+    </tr>
+    <!-- END : IMAGE -->
+                        
+    <!-- BEGIN : IMAGE -->
+    <tr>
+        <td align="center" style="padding:0;margin:0;display:block;height:auto;"> <img
+                src="./img/image_8.png" width="600" alt="image_8"
+                style="max-width:600px; display:block;height:auto; font-size: 26px; font-weight: bold; color:#ffffff;"
+                class="full-width" /> </td>
+    </tr>
+    <!-- END : IMAGE -->
+                        
+    <!-- BEGIN : IMAGE -->
+    <tr>
+        <td align="center" style="padding:0;margin:0;display:block;height:auto;"> <img
+                src="./img/image_9.png" width="600" alt="image_9"
+                style="max-width:600px; display:block;height:auto; font-size: 26px; font-weight: bold; color:#ffffff;"
+                class="full-width" /> </td>
+    </tr>
+    <!-- END : IMAGE -->
+                        
+    <!-- BEGIN : IMAGE -->
+    <tr>
+        <td align="center" style="padding:0;margin:0;display:block;height:auto;"> <img
+                src="./img/image_10.png" width="600" alt="image_10"
+                style="max-width:600px; display:block;height:auto; font-size: 26px; font-weight: bold; color:#ffffff;"
+                class="full-width" /> </td>
+    </tr>
+    <!-- END : IMAGE -->
+                        
+    <!-- BEGIN : IMAGE -->
+    <tr>
+        <td align="center" style="padding:0;margin:0;display:block;height:auto;"> <img
+                src="./img/image_11.jpg" width="600" alt="image_11"
+                style="max-width:600px; display:block;height:auto; font-size: 26px; font-weight: bold; color:#ffffff;"
+                class="full-width" /> </td>
+    </tr>
+    <!-- END : IMAGE -->
+                            <!-- END : dynamic content -->
+
+                        </table>
+                        <!-- END: INNER TABLE -->
+                        <!--[if (gte mso 9)|(IE)]>
+                                                    </td>
+                                                </tr>
+                                                </table>
+                                                <![endif]-->
+                    </td>
+                </tr>
+            </table>
+            <!-- END : OUTER CONTAINER -->
+        </div>
+        <!-- iOS GMAIL WEB FONT SIZE FIX -->
+        <div class="gmail-fix" style="white-space:nowrap;font:15px courier;line-height:0;"></div>
+    </center>
+</body>
+
+</html>
