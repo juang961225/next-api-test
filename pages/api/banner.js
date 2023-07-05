@@ -52,7 +52,7 @@ const getBannerData = (element) => {
         width: element.split("__").pop().split("x").shift(), // Gets the width of the banner from the folder title
         height: element.split("x").pop(), // Gets the height of the banner from the folder title
         name: element.split("__").shift(), // Gets the name of the banner from the folder title
-        frames: element.includes("-ff2") ? true : false, // Gets the frames
+        frames: element.includes("-ff") ? true : false, // Gets the frames
     };
 };
 
