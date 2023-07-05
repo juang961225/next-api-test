@@ -1,17 +1,14 @@
 exports.markups = {
-    jsAnimation: (name, frame) => {
-        const numberToLabel = {
-            1: "first",
-            2: "second",
-            3: "third",
-        };
+    jsAnimation: (name, fileName, frames) => {
+        const number = (name.match(/\d+/g) || ["1"])[0];
 
-        const number = name.match(/\d+/)?.[0] || "1";
-        const label = numberToLabel[number] || "first";
+        const label = "animation" + number || "animation" + "1";
         const nextNumber = parseInt(number) + 1;
-        const outLabel = name.match(/\d+/)
-            ? numberToLabel[nextNumber] || "last"
+        let outLabel = name.match(/\d+/g)
+            ? "animation" + nextNumber || "last"
             : "last";
+
+        outLabel = number == frames ? "last" : outLabel;
 
         const templateString =
             outLabel == "last"

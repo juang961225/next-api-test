@@ -52,7 +52,9 @@ const getBannerData = (element) => {
         width: element.split("__").pop().split("x").shift(), // Gets the width of the banner from the folder title
         height: element.split("x").pop(), // Gets the height of the banner from the folder title
         name: element.split("__").shift(), // Gets the name of the banner from the folder title
-        frames: element.includes("-ff") ? true : false, // Gets the frames
+        frames: element.includes("-ff")
+            ? element.split("-ff").pop().split("__").shift()
+            : '', // Gets the frames
     };
 };
 
@@ -66,7 +68,8 @@ const elementMarkup = (
     fileName,
     type = "bannerHtml",
     width = "",
-    height = ""
+    height = "",
+    frames = "",
 ) => {
     const [name, special] = fileName.split("."); // Gets the base name of the file by removing the file extension
     return markups[special === "link" ? "emailHtmlLink" : type](
