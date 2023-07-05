@@ -1,22 +1,16 @@
 exports.markups = {
     jsAnimation: (name, frame) => {
-        let label = 'Animation';
+        const numberToLabel = {
+            1: "first",
+            2: "second",
+            3: "third",
+        };
 
-        if (name.includes("1")) {
-            label = "first";
-        } else if (name.includes("2")) {
-            label = "second";
-        } else if (name.includes("3")) {
-            label = "third";
-        } else {
-            label = "first"; // Default label if none of the above conditions are met
-        }
+        const number = name.match(/\d+/)?.[0] || "1";
+        const label = numberToLabel[number] || "first";
 
-        if (frame) {
-            return `.from(".${name}", 3, { autoAlpha: 0, y:10, ease: "power2.out" }, "${label}")`;
-        } else {
-            return `.to(".${name}", 3, { autoAlpha: 0, y:10, ease: "power2.out" }, "${label}")`;
-        }
+        const animationType = frame ? "from" : "to";
+        return `.${animationType}(".${name}", 3, { autoAlpha: 0, y:10, ease: "power2.out" }, "${label}")`;
     },
     cssNode: (name, fileName, width, height) => `
     .${name} {
