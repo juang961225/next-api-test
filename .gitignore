@@ -14,7 +14,7 @@
 
 # production
 /build
-/output
+public/output/
 
 # misc
 .DS_Store

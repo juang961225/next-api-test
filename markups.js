@@ -8,9 +8,17 @@ exports.markups = {
 
         const number = name.match(/\d+/)?.[0] || "1";
         const label = numberToLabel[number] || "first";
+        const nextNumber = parseInt(number) + 1;
+        const outLabel = name.match(/\d+/)
+            ? numberToLabel[nextNumber] || "last"
+            : "last";
 
-        const animationType = frame ? "from" : "to";
-        return `.${animationType}(".${name}", 3, { autoAlpha: 0, y:10, ease: "power2.out" }, "${label}")`;
+        const templateString =
+            outLabel == "last"
+                ? `.from(".${name}", 3, { autoAlpha: 0, y:10, ease: "power2.out" }, "${label}")`
+                : `.from(".${name}", 3, { autoAlpha: 0, y:10, ease: "power2.out" }, "${label}").to(".${name}", 3, { autoAlpha: 0, y:10, ease: "power2.out" }, "${outLabel}")`;
+
+        return templateString;
     },
     cssNode: (name, fileName, width, height) => `
     .${name} {

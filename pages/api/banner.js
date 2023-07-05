@@ -198,7 +198,7 @@ const startProcess = () => {
     const fileList = getFileList(folderLocation);
     createBaseFolders(fileList); // Create the necessary output folders
     createHtmlFiles(fileList); // create emails and banners
-    console.log("prueba nuemro toro"); // Gets the list of files and folders inside the provided folder
+    console.log("test number one"); // Gets the list of files and folders inside the provided folder
 };
 
 export default function handler(_req, res) {
