@@ -150,7 +150,7 @@ const createHtmlFiles = (list) => {
                 )
                 .join("\n"); // Generates CSS markup for banner elements
 
-            const bannerBackground = "#00809a"; // Banner background color
+            const bannerBackground = "#ffffff"; // Banner background color
             const baseStyles = fs.readFileSync(
                 `${folderTemplate}/bannerStyles.css`,
                 "utf8"

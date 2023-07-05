@@ -15,8 +15,8 @@ exports.markups = {
 
         const templateString =
             outLabel == "last"
-                ? `.from(".${name}", 3, { autoAlpha: 0, y:10, ease: "power2.out" }, "${label}")`
-                : `.from(".${name}", 3, { autoAlpha: 0, y:10, ease: "power2.out" }, "${label}").to(".${name}", 3, { autoAlpha: 0, y:10, ease: "power2.out" }, "${outLabel}")`;
+                ? `.from(".${name}", 3, { autoAlpha: 0, y:5, ease: "power2.out" }, "${label}")`
+                : `.from(".${name}", 3, { autoAlpha: 0, y:5, ease: "power2.out" }, "${label}").to(".${name}", 1, { autoAlpha: 0, y:5, ease: "power2.out" }, "${outLabel}")`;
 
         return templateString;
     },
