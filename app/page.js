@@ -2,9 +2,14 @@
 import Image from "next/image";
 
 export default function Home() {
-    async function handleClick() {
-        console.log("increment like count");
-        const preformattedData = await fetch("api/banner");
+    async function createBanners() {
+        const preformattedData = await fetch("api/generateBanner");
+        const data = await preformattedData.json();
+        console.log(data);
+    }
+
+    async function createEmails() {
+        const preformattedData = await fetch("api/generateEmail");
         const data = await preformattedData.json();
         console.log(data);
     }
@@ -13,10 +18,19 @@ export default function Home() {
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
             <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
                 <button
-                    onClick={handleClick}
+                    onClick={createBanners}
                     className="group rounded-lg border px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
                 >
-                    test button to create banners
+                    create banners button
+                </button>
+            </div>
+
+            <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
+                <button
+                    onClick={createEmails}
+                    className="group rounded-lg border px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+                >
+                    create emails button
                 </button>
             </div>
 

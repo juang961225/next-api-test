@@ -2,8 +2,8 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 
-import { getFileList, prepareEnvironment, copyAssets } from "@/utils";
-import { markups } from "@/markups";
+import { getFileList, prepareEnvironment, copyAssets } from "@/scripts/utils";
+import { markups } from "@/scripts/markups";
 
 // constants
 const outPutFolder = path.resolve("./public", "output"); // Path to the output folder where the banners will be generated // Path to the output folder where the banners will be generated
