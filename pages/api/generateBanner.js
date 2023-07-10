@@ -1,16 +1,13 @@
 
-
-
-
-
 const startProcess = () => {
 
-    
 
-    return true;
+
+    return 'banner';
 }
 
-export default function handler(_req, res) {
+export default function handler(req, res) {
+    console.log(req.body);
     try {
         const output = startProcess();
         return res.status(200).json({"result": output});

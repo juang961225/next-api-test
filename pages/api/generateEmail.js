@@ -1,8 +1,6 @@
 
-
-
 const startProcess = () => {
-    return true;
+    return 'email';
 }
 
 export default function handler(_req, res) {
