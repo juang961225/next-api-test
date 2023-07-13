@@ -1,4 +1,12 @@
 "use client";
+
+import { ContainerFolders } from "./components/ContainerFolders/ContainerFolders";
+import { ContainerButton } from "./components/ContainerButton/ContainerButton";
+import { AssetItemBanner } from "./components/AssetItemBanner/AssetItemBanner";
+import { AssetItemEmail } from "./components/AssetItemEmail/AssetItemEmail";
+import { ButtonItem } from "./components/ButtonItem/ButtonItem";
+import { BannerItem } from "./components/BannerItem/BannerItem";
+import { EmailItem } from "./components/EmailItem/EmailItem";
 import Image from "next/image";
 import React from "react";
 
@@ -79,98 +87,120 @@ export default function Home() {
                 <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     {elements.map((element, indexFolder) => (
                         <ul className="" key={indexFolder}>
-                            <li className="">
-                                <div className="flex">
-                                    <div
-                                        onClick={() =>
-                                            toggleHidden(indexFolder)
-                                        }
-                                        className="w-auto mb-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                    >
-                                        {element.name}
-                                    </div>
-                                    <label
-                                        htmlFor="quantity"
-                                        className="text-gray-700 text-sm font-bold mb-2 px-5 flex items-center"
-                                    >
-                                        frames
-                                    </label>
-                                    <input
-                                        id="quantity"
-                                        type="number"
-                                        value={quantity}
-                                        onChange={handleQuantityChange}
-                                        className="mb-2 w-10 shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    />
+                            <div className="flex">
+                                <div
+                                    onClick={() => toggleHidden(indexFolder)}
+                                    className="w-auto mb-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                >
+                                    {element.name}
                                 </div>
-                                {element.assets.map((element, indexAsset) => (
-                                    <ul
-                                        key={indexAsset}
-                                        className={
-                                            hiddenElements[indexFolder]
-                                                ? ""
-                                                : "hidden"
-                                        }
-                                    >
-                                        <li className="flex">
-                                            <span className="px-2">
-                                                {element}
-                                            </span>
-                                            <label
-                                                htmlFor="options"
-                                                className="block text-gray-700 text-sm font-bold mb-2 px-2"
-                                            >
-                                                enter
-                                            </label>
-                                            <select
-                                                id="options"
-                                                defaultValue=""
-                                                name="asset"
-                                                className="block py-0 px-5 w-auto text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
-                                            >
-                                                {Array.from(
-                                                    { length: quantity },
-                                                    (_, index) => (
-                                                        <option
-                                                            key={index}
-                                                            value={index + 1}
-                                                        >
-                                                            frame {index + 1}
-                                                        </option>
-                                                    )
-                                                )}
-                                            </select>
-                                            <label
-                                                htmlFor="options"
-                                                className="block text-gray-700 text-sm font-bold mb-2"
-                                            >
-                                                leave
-                                            </label>
-                                            <select
-                                                name="asset"
-                                                id="options"
-                                                defaultValue=""
-                                                className="block py-2 px-5 w-auto text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer
+                                <label
+                                    htmlFor="quantity"
+                                    className="text-gray-700 text-sm font-bold mb-2 px-5 flex items-center"
+                                >
+                                    frames
+                                </label>
+                                <input
+                                    id="quantity"
+                                    type="number"
+                                    value={quantity}
+                                    onChange={handleQuantityChange}
+                                    className="mb-2 w-10 shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                            </div>
+                            {element.assets.map((element, indexAsset) => (
+                                <ul
+                                    key={indexAsset}
+                                    className={
+                                        hiddenElements[indexFolder]
+                                            ? ""
+                                            : "hidden"
+                                    }
+                                >
+                                    <li className="flex">
+                                        <span className="px-2">{element}</span>
+                                        <label
+                                            htmlFor="options"
+                                            className="block text-gray-700 text-sm font-bold mb-2 px-2"
+                                        >
+                                            enter
+                                        </label>
+                                        <select
+                                            id="options"
+                                            defaultValue=""
+                                            name="asset"
+                                            className="block py-0 px-5 w-auto text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+                                        >
+                                            {Array.from(
+                                                { length: quantity },
+                                                (_, index) => (
+                                                    <option
+                                                        key={index}
+                                                        value={index + 1}
+                                                    >
+                                                        frame {index + 1}
+                                                    </option>
+                                                )
+                                            )}
+                                        </select>
+                                        <label
+                                            htmlFor="options"
+                                            className="block text-gray-700 text-sm font-bold mb-2"
+                                        >
+                                            leave
+                                        </label>
+                                        <select
+                                            name="asset"
+                                            id="options"
+                                            defaultValue=""
+                                            className="block py-2 px-5 w-auto text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer
                                                 "
-                                            >
-                                                {Array.from(
-                                                    { length: quantity },
-                                                    (_, index) => (
-                                                        <option
-                                                            key={index}
-                                                            value={index + 1}
-                                                        >
-                                                            frame {index + 1}
-                                                        </option>
-                                                    )
-                                                )}
-                                            </select>
-                                        </li>
-                                    </ul>
-                                ))}
-                            </li>
+                                        >
+                                            {Array.from(
+                                                { length: quantity },
+                                                (_, index) => (
+                                                    <option
+                                                        key={index}
+                                                        value={index + 1}
+                                                    >
+                                                        frame {index + 1}
+                                                    </option>
+                                                )
+                                            )}
+                                        </select>
+                                    </li>
+                                </ul>
+                            ))}
                         </ul>
                     ))}
+                </form>
+            </div>
+
+            <div>
+                new structure with React
+                <ContainerButton>
+                    <ButtonItem />
+                    <ButtonItem />
+                    <ButtonItem />
+                </ContainerButton>
+                <form
+                    action=""
+                    className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-gray-500"
+                >
+                    {/* folders banners */}
+                    <ContainerFolders>
+                        <BannerItem>
+                            <AssetItemBanner />
+                            <AssetItemBanner />
+                        </BannerItem>
+                    </ContainerFolders>
+                    {/* folders emails */}
+                    <ContainerFolders>
+                        <EmailItem>
+                            <AssetItemEmail />
+                            <AssetItemEmail />
+                        </EmailItem>
+                    </ContainerFolders>
                 </form>
             </div>
 
