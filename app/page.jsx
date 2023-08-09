@@ -40,7 +40,7 @@ export default function Home() {
     }
 
     async function createBanners() {
-        const preformattedData = await fetch("api/generateBanner", {
+        const preformattedData = await fetch("api/banner", {
             method: "POST",
             body: JSON.stringify({
                 name: "test",
