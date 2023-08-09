@@ -179,9 +179,9 @@ export default function Home() {
             <div>
                 new structure with React
                 <ContainerButton>
-                    <ButtonItem />
-                    <ButtonItem />
-                    <ButtonItem />
+                    <ButtonItem buttonText = {`get banner folder`} buttonClick={getBannerData}/>
+                    <ButtonItem buttonText = {`create banner`} buttonClick={createBanners}/>
+                    <ButtonItem buttonText = {`create email`} buttonClick={createEmails}/>
                 </ContainerButton>
                 <form
                     action=""
