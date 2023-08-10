@@ -1,9 +1,9 @@
 function ContainerButton(props) {
-    return (
-        <ul>
-            {props.children}
-        </ul>
-    )
+  return (
+    <ul className="w-full flex justify-center items-center gap-5">
+      {props.children}
+    </ul>
+  );
 }
 
-export {ContainerButton};
+export { ContainerButton };
