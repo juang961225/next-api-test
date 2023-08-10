@@ -7,11 +7,13 @@ body {
 }
 
 ::selection {
- @apply bg-transparent text-amber-700 drop-shadow-2xl
+    @apply bg-transparent text-amber-700 drop-shadow-2xl
 }
+
 @tailwind components;
 
-button {
+button,
+.button {
     @apply w-96 bg-neutral-900 hover:bg-amber-700 text-amber-100 hover:text-amber-200 font-bold py-2 px-4 rounded transition duration-200
 }
 

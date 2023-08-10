@@ -87,24 +87,25 @@ export default function Home() {
           })}
         </ContainerButton>
       </div>
-      <form
-        action=""
-        className="container mx-auto h-96 bg-neutral-200 shadow-md rounded p-8 flex justify-start items-start gap-5"
-      >
-        {/* folders banners */}
-        <ContainerFolders>
-          <BannerItem>
-            <AssetItemBanner />
-            <AssetItemBanner />
-          </BannerItem>
-        </ContainerFolders>
-        {/* folders emails */}
-        <ContainerFolders>
-          <EmailItem>
-            <AssetItemEmail />
-            <AssetItemEmail />
-          </EmailItem>
-        </ContainerFolders>
+      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        {elements.map((element, indexFolder) => (
+          <div key={indexFolder}>
+            <BannerItem
+              action={() => toggleHidden(indexFolder)}
+              text={element.name}
+              quantity={quantity}
+              change={handleQuantityChange}
+            />
+            {element.assets.map((element, indexAsset) => (
+              <AssetItemBanner
+                key={indexAsset}
+                hiddenElements={hiddenElements[indexFolder]}
+                element={element}
+                quantity={quantity}
+              />
+            ))}
+          </div>
+        ))}
       </form>
     </main>
   );
