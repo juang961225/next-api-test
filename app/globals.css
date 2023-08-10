@@ -1,11 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @tailwind base;
+
 body {
-    @apply m-0 p-0 overflow-x-hidden bg-white
+    @apply m-0 p-0 overflow-x-hidden bg-amber-100 font-Poppins
+}
+
+::selection {
+ @apply bg-transparent text-amber-700 drop-shadow-2xl
 }
 @tailwind components;
+
 button {
-    @apply bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-10
+    @apply w-96 bg-neutral-900 hover:bg-amber-700 text-amber-100 hover:text-amber-200 font-bold py-2 px-4 rounded transition duration-200
 }
+
 @tailwind utilities;
-
-
