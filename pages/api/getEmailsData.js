@@ -1,25 +1,23 @@
 // instances
 import { basePath } from "@/next.config";
 import * as fs from "node:fs";
-const path = require("node:path");
+import * as path from "node:path";
 
-const typeFolder = "emails"
+const BASE_PATH = path.resolve("./public/pending_tasks/emails");
 
-let BASE_PATH = path.resolve("./public/pending_tasks/" + typeFolder);
-
-console.log(BASE_PATH)
-
-const getFolders = (basePath) => fs.readdirSync(basePath);
+const getBannerFolders = (basePath) => fs.readdirSync(basePath);
 
 const getAssets = (assetPath) => {
-
     const fullPath = path.resolve(`${BASE_PATH}/${assetPath}`, "img");
-
     return fs.readdirSync(fullPath);
 };
 
 const startProcess = () => {
-    let bannerFolders = getFolders(BASE_PATH);
+    let bannerFolders = getBannerFolders(BASE_PATH);
+
+    bannerFolders.splice(0, 1)
+
+    console.log(bannerFolders)
 
     const bannerData = bannerFolders.map((element) => {
         const assets = getAssets(element);
@@ -41,4 +39,3 @@ export default function handler(_req, res) {
         return res.status(417).json(err);
     }
 }
-

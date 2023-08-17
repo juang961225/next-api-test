@@ -36,22 +36,65 @@ export default function Home() {
   };
 
   async function getBannerData() {
-    const preformattedData = await fetch("api/get_banner_data");
-    const data = await preformattedData.json();
-    setElements(data.result);
-    console.log(data);
-  }
-
-  async function createBanners() {
-    const preformattedData = await fetch("api/banner", {
+    const preformattedData = await fetch("api/get_banner_data", {
       method: "POST",
       body: JSON.stringify({
         name: "test",
       }),
     });
+
     const data = await preformattedData.json();
+    setElements(data.result);
     console.log(data);
   }
+  async function getEmailData() {
+    const preformattedData = await fetch("api/getEmailsData");
+    const data = await preformattedData.json();
+    setElements(data.result);
+    console.log(data);
+  }
+
+  async function getBannerData() {
+    try {
+      const requestData = {
+        name: "test",
+        additionalInfo: "Hello, additional data!",
+        // Puedes agregar más campos aquí si es necesario
+      };
+
+      const response = await fetch("api/get_banner_data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Error al realizar la solicitud: ${response.status} ${response.statusText}`
+        );
+      }
+
+      const responseData = await response.json();
+
+      // Puedes hacer algo con la responseData aquí, como procesarla o mostrarla en la interfaz
+      console.log("Respuesta recibida:", responseData);
+    } catch (error) {
+      console.error("Ocurrió un error:", error);
+    }
+  }
+
+  // async function createBanners() {
+  //   const preformattedData = await fetch("api/banner", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       name: "daniel",
+  //     }),
+  //   });
+  //   const data = await preformattedData.json();
+  //   console.log(data + " esto es lo que va pegado");
+  // }
 
   async function createEmails() {
     const preformattedData = await fetch("api/generateEmail");
@@ -59,8 +102,12 @@ export default function Home() {
     console.log(data);
   }
 
-  const buttons = [
-    { text: "Get Folder", action: getBannerData },
+  const getButtons = [
+    { text: "Get Banners", action: getBannerData },
+    { text: "Get Emails", action: getEmailData },
+  ];
+
+  const createButtons = [
     { text: "Create Banner", action: createBanners },
     { text: "Create Email", action: createEmails },
   ];
@@ -80,32 +127,38 @@ export default function Home() {
       </div>
       <div className="container mx-auto">
         <ContainerButton>
-          {buttons.map((b, i) => {
+          {getButtons.map((b, i) => {
+            return (
+              <ButtonItem buttonText={b.text} buttonClick={b.action} key={i} />
+            );
+          })}
+          {createButtons.map((b, i) => {
             return (
               <ButtonItem buttonText={b.text} buttonClick={b.action} key={i} />
             );
           })}
         </ContainerButton>
       </div>
-      <form
-        action=""
-        className="container mx-auto h-96 bg-neutral-200 shadow-md rounded p-8 flex justify-start items-start gap-5"
-      >
-        {/* folders banners */}
-        <ContainerFolders>
-          <BannerItem>
-            <AssetItemBanner />
-            <AssetItemBanner />
-          </BannerItem>
-        </ContainerFolders>
-        {/* folders emails */}
-        <ContainerFolders>
-          <EmailItem>
-            <AssetItemEmail />
-            <AssetItemEmail />
-          </EmailItem>
-        </ContainerFolders>
-      </form>
+      <div className="bg-white w-3/6 mx-auto shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        {elements.map((element, indexFolder) => (
+          <div key={indexFolder}>
+            <BannerItem
+              action={() => toggleHidden(indexFolder)}
+              text={element.name}
+              quantity={quantity}
+              change={handleQuantityChange}
+            />
+            {element.assets.map((element, indexAsset) => (
+              <AssetItemBanner
+                key={indexAsset}
+                hiddenElements={hiddenElements[indexFolder]}
+                element={element}
+                quantity={quantity}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
     </main>
   );
 }
