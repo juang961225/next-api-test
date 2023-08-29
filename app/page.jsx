@@ -56,7 +56,6 @@ export default function Home() {
         }
     }
 
-
     async function createBanners() {
         const preformattedData = await fetch("api/banner", {
             method: "POST",
@@ -85,11 +84,11 @@ export default function Home() {
         },
         {
             text: "Create Banner",
-            action: createBanners,
+            action: () => createBanners(),
         },
         {
             text: "Create Email",
-            action: createEmails,
+            action: () => createEmails(),
         },
     ];
 
