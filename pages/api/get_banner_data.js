@@ -1,7 +1,7 @@
 // instances
 import { basePath } from "@/next.config";
 import * as fs from "node:fs";
-import * as path from "node:path";
+const path = require("node:path");
 
 const getBannerFolders = (basePath) => fs.readdirSync(basePath);
 
@@ -39,3 +39,4 @@ export default function handler(req, res) {
         return res.status(500).json({ error: "Internal server error" });
     }
 }
+

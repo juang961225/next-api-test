@@ -1,6 +1,35 @@
 // instances
 import * as fs from "node:fs";
 import * as path from "node:path";
+import * as express from "express";
+import * as bodyParser from "body-parser";
+const app = express();
+const port = 3000;
+
+//_________________________________________________
+app.use(bodyParser.json());
+
+app.post("/api/get_banner_data", (req, res) => {
+    const requestData = req.body;
+
+    // Accede a la información enviada en la solicitud
+    const name = requestData.name;
+    const additionalInfo = requestData.additionalInfo;
+
+    // Aquí puedes procesar los datos y enviar una respuesta al cliente
+    const responseData = {
+        message: "Datos recibidos correctamente",
+        receivedName: name,
+        receivedAdditionalInfo: additionalInfo,
+    };
+
+    res.json(responseData);
+});
+
+app.listen(port, () => {
+    console.log(`Servidor en ejecución en http://localhost:${port}`);
+});
+//_________________________________________________
 
 import { getFileList, prepareEnvironment, copyAssets } from "@/scripts/utils";
 import { markups } from "@/scripts/markups";
@@ -207,7 +236,8 @@ const startProcess = () => {
 export default function handler(_req, res) {
     try {
         startProcess();
-        return res.status(200).json(true);
+        let x = 'pruebaaaaaa'
+        return res.status(200).json(x);
     } catch (err) {
         console.error(err);
         return res.status(417).json(err);
