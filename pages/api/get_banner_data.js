@@ -3,20 +3,20 @@ import { basePath } from "@/next.config";
 import * as fs from "node:fs";
 import * as path from "node:path";
 
-const BASE_PATH = path.resolve("./public/pending_tasks/banners");
-
 const getBannerFolders = (basePath) => fs.readdirSync(basePath);
 
-const getAssets = (assetPath) => {
-    const fullPath = path.resolve(`${BASE_PATH}/${assetPath}`, "assets");
+const getAssets = (assetPath, PathRute, parameterValue) => {
+    const fullPath = path.resolve(`${PathRute}/${assetPath}`, parameterValue);
     return fs.readdirSync(fullPath);
 };
 
-const startProcess = () => {
+const startProcess = (parameterValue) => {
+    const BASE_PATH = path.resolve(parameterValue.url);
+
     const bannerFolders = getBannerFolders(BASE_PATH);
 
     const bannerData = bannerFolders.map((element) => {
-        const assets = getAssets(element);
+        const assets = getAssets(element, BASE_PATH, parameterValue.img);
         return {
             name: element,
             assets,
@@ -26,12 +26,16 @@ const startProcess = () => {
     return bannerData;
 };
 
-export default function handler(_req, res) {
+// pages/api/get_banner_data.js
+export default function handler(req, res) {
     try {
-        const output = startProcess();
+        let parameterValue = req.query.parametro;
+        parameterValue = JSON.parse(decodeURIComponent(parameterValue));
+        // Realiza el procesamiento necesario con parameterValue y obtén el resultado
+        const output = startProcess(parameterValue);
         return res.status(200).json({ result: output });
     } catch (err) {
         console.error(err);
-        return res.status(417).json(err);
+        return res.status(500).json({ error: "Internal server error" });
     }
 }
