@@ -1,5 +1,9 @@
 function ContainerFolders(props) {
-  return <ul className="w-3/6">{props.children}</ul>;
+  return (
+    <ul className={`${props.hiddenElements ? "w-3/6" : "hidden"}`}>
+      {props.children}
+    </ul>
+  );
 }
 
 export { ContainerFolders };

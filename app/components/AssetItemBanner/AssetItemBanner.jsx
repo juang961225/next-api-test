@@ -1,6 +1,6 @@
 function AssetItemBanner(props) {
   return (
-    <ul className={props.hiddenElements ? "" : "hidden"}>
+    <ul>
       <li className="flex">
         <span className="px-2">{props.element}</span>
         <label

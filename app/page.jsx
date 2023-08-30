@@ -19,124 +19,159 @@ const logo = require("../public/ddb-bg.png");
 // cada asssets debe de tener dos selects que deteerminee el numero de entrada y el de salida (frame)
 
 export default function Home() {
-    let [elements, setElements] = React.useState([]);
+  let [elements, setElements] = React.useState([]);
 
-    const [hiddenElements, setHiddenElements] = React.useState([]);
-    const toggleHidden = (index) => {
-        setHiddenElements((prevHiddenElements) => {
-            const updatedHiddenElements = [...prevHiddenElements];
-            updatedHiddenElements[index] = !updatedHiddenElements[index];
-            return updatedHiddenElements;
-        });
+  const [hiddenBanners, setHiddenBanners] = React.useState(false);
+  const [hiddenEmails, setHiddenEmails] = React.useState(false);
+
+  const toggleHidden = () => {
+    setHiddenElements((prevHiddenElements) => {
+      const updatedHiddenElements = [...prevHiddenElements];
+      updatedHiddenElements[index] = !updatedHiddenElements[index];
+      return updatedHiddenElements;
+    });
+  };
+
+  const [quantity, setQuantity] = React.useState(0);
+  const handleQuantityChange = (event) => {
+    setQuantity(parseInt(event.target.value));
+  };
+
+  async function getBannerData(path) {
+    const img = path === "banners" ? "assets" : "img";
+
+    if (img === "assets") {
+      setHiddenBanners(!hiddenBanners);
+      setHiddenEmails(false);
+    } else {
+      setHiddenEmails(!hiddenEmails);
+      setHiddenBanners(false);
+    }
+
+    let parameterValue = {
+      url: `./public/pending_tasks/${path}`,
+      img: img,
     };
 
-    const [quantity, setQuantity] = React.useState(0);
-    const handleQuantityChange = (event) => {
-        setQuantity(parseInt(event.target.value));
-    };
+    parameterValue = encodeURIComponent(JSON.stringify(parameterValue));
 
-    async function getBannerData(path) {
-        const img = path === "banners" ? "assets" : "img";
+    try {
+      const response = await fetch(
+        `/api/get_banner_data?parametro=${parameterValue}`
+      );
+      const data = await response.json();
+      console.log(data.result);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
 
-        let parameterValue = {
-            url: `./public/pending_tasks/${path}`,
-            img: img,
-        };
+  async function createBanners() {
+    const preformattedData = await fetch("api/banner", {
+      method: "POST",
+      body: JSON.stringify({
+        name: "test",
+      }),
+    });
+    const data = await preformattedData.json();
+    console.log(data);
+  }
 
-        parameterValue = encodeURIComponent(JSON.stringify(parameterValue));
+  async function createEmails() {
+    const preformattedData = await fetch("api/generateEmail");
+    const data = await preformattedData.json();
+    console.log(data);
+  }
 
-        try {
-            const response = await fetch(
-                `/api/get_banner_data?parametro=${parameterValue}`
+  const getButtons = [
+    {
+      text: "Get Banners",
+      action: () => getBannerData("banners"),
+    },
+    {
+      text: "Get Emails",
+      action: () => getBannerData("emails"),
+    },
+  ];
+
+  const createButtons = [
+    {
+      text: "Create Banner",
+      action: () => createBanners(),
+    },
+    {
+      text: "Create Email",
+      action: () => createEmails(),
+    },
+  ];
+
+  return (
+    <main className="w-full flex flex-col min-h-screen p-12 gap-12">
+      <div className="flex flex-col gap-3">
+        <Image
+          src={logo}
+          alt={"logo"}
+          width={150}
+          className="mx-auto mix-blend-multiply"
+        />
+        <h1 className="mx-auto text-3xl font-Poppins font-bold uppercase text-amber-950">
+          Banners & Email Creator
+        </h1>
+      </div>
+      <div className="container mx-auto">
+        <ContainerButton>
+          {getButtons.map((b, i) => {
+            return (
+              <ButtonItem buttonText={b.text} buttonClick={b.action} key={i} />
             );
-            const data = await response.json();
-            console.log(data.result);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    }
+          })}
+        </ContainerButton>
+      </div>
+      <form
+        action=""
+        className={`w-auto mx-auto h-96 bg-neutral-200 shadow-md rounded p-8 flex justify-start items-start gap-5 ${
+          hiddenBanners || hiddenEmails ? "" : "hidden"
+        }`}
+      >
+        {/* folders banners */}
+        <ContainerFolders hiddenElements={hiddenBanners}>
+          <BannerItem action={toggleHidden} text={elements.name}>
+            <AssetItemBanner />
+            <AssetItemBanner />
+          </BannerItem>
+        </ContainerFolders>
+        {/* folders emails */}
+        <ContainerFolders hiddenElements={hiddenEmails}>
+          <EmailItem>
+            <AssetItemEmail />
+            <AssetItemEmail />
+          </EmailItem>
+        </ContainerFolders>
+      </form>
 
-    async function createBanners() {
-        const preformattedData = await fetch("api/banner", {
-            method: "POST",
-            body: JSON.stringify({
-                name: "test",
-            }),
-        });
-        const data = await preformattedData.json();
-        console.log(data);
-    }
+      <div className="container mx-auto">
+        {hiddenBanners ? (
+          <ContainerButton>
+            <ButtonItem
+              buttonText={createButtons[0].text}
+              buttonClick={createButtons[0].action}
+            />
+          </ContainerButton>
+        ) : (
+          <></>
+        )}
 
-    async function createEmails() {
-        const preformattedData = await fetch("api/generateEmail");
-        const data = await preformattedData.json();
-        console.log(data);
-    }
-
-    const buttons = [
-        {
-            text: "Get Folder banner",
-            action: () => getBannerData("banners"),
-        },
-        {
-            text: "Get Folder email",
-            action: () => getBannerData("emails"),
-        },
-        {
-            text: "Create Banner",
-            action: () => createBanners(),
-        },
-        {
-            text: "Create Email",
-            action: () => createEmails(),
-        },
-    ];
-
-    return (
-        <main className="w-full flex flex-col min-h-screen p-12 gap-12">
-            <div className="flex flex-col gap-3">
-                <Image
-                    src={logo}
-                    alt={"logo"}
-                    width={150}
-                    className="mx-auto mix-blend-multiply"
-                />
-                <h1 className="mx-auto text-3xl font-Poppins font-bold uppercase text-amber-950">
-                    Banners & Email Creator
-                </h1>
-            </div>
-            <div className="container mx-auto">
-                <ContainerButton>
-                    {buttons.map((b, i) => {
-                        return (
-                            <ButtonItem
-                                buttonText={b.text}
-                                buttonClick={b.action}
-                                key={i}
-                            />
-                        );
-                    })}
-                </ContainerButton>
-            </div>
-            <form
-                action=""
-                className="container mx-auto h-96 bg-neutral-200 shadow-md rounded p-8 flex justify-start items-start gap-5"
-            >
-                {/* folders banners */}
-                <ContainerFolders>
-                    <BannerItem>
-                        <AssetItemBanner />
-                        <AssetItemBanner />
-                    </BannerItem>
-                </ContainerFolders>
-                {/* folders emails */}
-                <ContainerFolders>
-                    <EmailItem>
-                        <AssetItemEmail />
-                        <AssetItemEmail />
-                    </EmailItem>
-                </ContainerFolders>
-            </form>
-        </main>
-    );
+        {hiddenEmails ? (
+          <ContainerButton>
+            <ButtonItem
+              buttonText={createButtons[1].text}
+              buttonClick={createButtons[1].action}
+            />
+          </ContainerButton>
+        ) : (
+          <></>
+        )}
+      </div>
+    </main>
+  );
 }
