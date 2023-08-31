@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 
 import { ContainerFolders } from "./components/ContainerFolders/ContainerFolders";
 import { ContainerButton } from "./components/ContainerButton/ContainerButton";
@@ -10,8 +9,8 @@ import { AssetItemEmail } from "./components/AssetItemEmail/AssetItemEmail";
 import { ButtonItem } from "./components/ButtonItem/ButtonItem";
 import { BannerItem } from "./components/BannerItem/BannerItem";
 import { EmailItem } from "./components/EmailItem/EmailItem";
-
-const logo = require("../public/ddb-bg.png");
+import Navbar from "./components/Navbar/Navbar";
+import { data } from "autoprefixer";
 
 // getBannerData deberia listar los banners encontrados en la interfaz
 // luego con esos names crear botones los cuales me van a generar debajo de ellos su lista de assets
@@ -64,6 +63,8 @@ export default function Home() {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+
+    return data.result;
   }
 
   async function createBanners() {
@@ -83,21 +84,18 @@ export default function Home() {
     console.log(data);
   }
 
-  const getButtons = [
-    {
-      text: "Get Banners",
-      action: () => getBannerData("banners"),
-    },
-    {
-      text: "Get Emails",
-      action: () => getBannerData("emails"),
-    },
-  ];
-
   const createButtons = [
+    {
+      text: "Preview Banner",
+      //action: () => previewBanners(),
+    },
     {
       text: "Create Banner",
       action: () => createBanners(),
+    },
+    {
+      text: "Preview Email",
+      //action: () => previewEmail(),
     },
     {
       text: "Create Email",
@@ -106,70 +104,89 @@ export default function Home() {
   ];
 
   return (
-    <main className="w-full flex flex-col min-h-screen p-12 gap-12">
-      <div className="flex flex-col gap-3">
-        <Image
-          src={logo}
-          alt={"logo"}
-          width={150}
-          className="mx-auto mix-blend-multiply"
-        />
-        <h1 className="mx-auto text-3xl font-Poppins font-bold uppercase text-amber-950">
-          Banners & Email Creator
-        </h1>
-      </div>
-      <div className="container mx-auto">
-        <ContainerButton>
-          {getButtons.map((b, i) => {
-            return (
-              <ButtonItem buttonText={b.text} buttonClick={b.action} key={i} />
-            );
-          })}
-        </ContainerButton>
-      </div>
-      <form
-        action=""
-        className={`w-auto mx-auto h-96 bg-neutral-200 shadow-md rounded p-8 flex justify-start items-start gap-5 ${
-          hiddenBanners || hiddenEmails ? "" : "hidden"
+    <main className="w-full flex flex-col min-h-screen py-5 px-16 gap-5">
+      <Navbar
+        bannerButtonAction={() => getBannerData("banners")}
+        emailButtonAction={() => getBannerData("emails")}
+      />
+      <div
+        className={`w-full h-[80vh] bg-neutral-100 p-5 ${
+          hiddenBanners || hiddenEmails
+            ? "flex items-stretch justify-center"
+            : "flex items-center justify-center"
         }`}
       >
-        {/* folders banners */}
-        <ContainerFolders hiddenElements={hiddenBanners}>
-          <BannerItem action={toggleHidden} text={elements.name}>
-            <AssetItemBanner />
-            <AssetItemBanner />
-          </BannerItem>
-        </ContainerFolders>
-        {/* folders emails */}
-        <ContainerFolders hiddenElements={hiddenEmails}>
-          <EmailItem>
-            <AssetItemEmail />
-            <AssetItemEmail />
-          </EmailItem>
-        </ContainerFolders>
-      </form>
-
-      <div className="container mx-auto">
-        {hiddenBanners ? (
-          <ContainerButton>
-            <ButtonItem
-              buttonText={createButtons[0].text}
-              buttonClick={createButtons[0].action}
-            />
-          </ContainerButton>
+        {!hiddenBanners && !hiddenEmails ? (
+          <p className="mx-auto text-center w-full uppercase">
+            Selecciona recurso
+          </p>
         ) : (
-          <></>
-        )}
+          <>
+            <div
+              className={`w-6/12 ${
+                hiddenBanners || hiddenEmails
+                  ? "border-r border-neutral-900 px-4"
+                  : ""
+              }`}
+            >
+              <form
+                action=""
+                className={`w-auto mx-auto h-96 bg-neutral-300 shadow-md rounded p-5 flex justify-start items-start gap-5 ${
+                  hiddenBanners || hiddenEmails ? "" : "hidden"
+                }`}
+              >
+                {/* folders banners */}
+                <ContainerFolders hiddenElements={hiddenBanners}>
+                  <BannerItem action={toggleHidden} text={data.result}>
+                    <AssetItemBanner />
+                    <AssetItemBanner />
+                  </BannerItem>
+                </ContainerFolders>
+                {/* folders emails */}
+                <ContainerFolders hiddenElements={hiddenEmails}>
+                  <EmailItem>
+                    <AssetItemEmail />
+                    <AssetItemEmail />
+                  </EmailItem>
+                </ContainerFolders>
+              </form>
+              <div className="w-full mt-5">
+                {hiddenBanners ? (
+                  <ContainerButton orientation={true}>
+                    <ButtonItem
+                      buttonText={createButtons[0].text}
+                      buttonClick={createButtons[0].action}
+                    />
+                    <ButtonItem
+                      buttonText={createButtons[1].text}
+                      buttonClick={createButtons[1].action}
+                    />
+                  </ContainerButton>
+                ) : (
+                  <></>
+                )}
 
-        {hiddenEmails ? (
-          <ContainerButton>
-            <ButtonItem
-              buttonText={createButtons[1].text}
-              buttonClick={createButtons[1].action}
-            />
-          </ContainerButton>
-        ) : (
-          <></>
+                {hiddenEmails ? (
+                  <ContainerButton orientation={true}>
+                    <ButtonItem
+                      buttonText={createButtons[2].text}
+                      buttonClick={createButtons[2].action}
+                    />
+                    <ButtonItem
+                      buttonText={createButtons[3].text}
+                      buttonClick={createButtons[3].action}
+                    />
+                  </ContainerButton>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+            <div className="w-6/12 flex justify-center items-center overflow-y-auto">
+              {hiddenBanners && "Banner preview"}
+              {hiddenEmails && "Email preview"}
+            </div>
+          </>
         )}
       </div>
     </main>

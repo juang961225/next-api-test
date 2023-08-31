@@ -1,7 +1,7 @@
 function EmailItem(props) {
   return (
     <li className="w-full flex flex-col">
-      <div className="flex mb-8 items-center justify-start gap-3">
+      <div className="flex mb-8 items-center justify-start gap-5">
         <button onClick={() => toggleHidden("indexFolder")}>
           {"element.name"}
         </button>

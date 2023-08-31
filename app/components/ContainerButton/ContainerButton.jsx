@@ -1,6 +1,12 @@
 function ContainerButton(props) {
   return (
-    <ul className={`w-full flex justify-center items-center gap-5`}>
+    <ul
+      className={`w-full flex gap-5 ${
+        props.orientation
+          ? "flex-col items-stretch justify-center "
+          : "flex-row items-center justify-end"
+      }`}
+    >
       {props.children}
     </ul>
   );
